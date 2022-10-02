@@ -7,7 +7,7 @@ public final class BallPosition {
     private static final int MIN = 1;
     private static final int MAX = 3;
 
-    private static class BallPositionCache {
+    private static final class BallPositionCache {
 
         private static final BallPosition[] cache;
 
@@ -22,37 +22,37 @@ public final class BallPosition {
         private BallPositionCache() {
         }
 
-        public static boolean contains(int value) {
+        public static boolean contains(final int value) {
             return cache[0].value <= value && value <= cache[cache.length - 1].value;
         }
 
-        public static BallPosition of(int value) {
+        public static BallPosition of(final int value) {
             return cache[value - 1];
         }
     }
 
-    private static void validate(int value) {
+    private static void validate(final int value) {
         if (!isInRange(value)) {
             throw new NumberFormatException(String.format("value is too small or too high: %d", value));
         }
     }
 
-    private static boolean isInRange(int value) {
+    private static boolean isInRange(final int value) {
         return MIN <= value && value <= MAX;
     }
 
     private final int value;
 
-    private BallPosition(int value) {
+    private BallPosition(final int value) {
         validate(value);
         this.value = value;
     }
 
-    public static BallPosition of(int value) {
+    public static BallPosition of(final int value) {
         if (BallPositionCache.contains(value)) {
             return BallPositionCache.of(value);
         }
-        return new BallPosition(value);
+        throw new IllegalArgumentException("not allowed ball position");
     }
 
     @Override

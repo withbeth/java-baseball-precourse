@@ -3,12 +3,12 @@ package baseball;
 import java.util.Objects;
 
 // TODO : move validation ?
-public class BallNumber {
+public final class BallNumber {
 
-    private static final int MIN = GameConfiguration.MIN_BALL_NUM;
-    private static final int MAX = GameConfiguration.MAX_BALL_NUM;
+    private static final int MIN = 1;
+    private static final int MAX = 9;
 
-    private static class BallNumberCache {
+    private static final class BallNumberCache {
 
         private static final BallNumber[] cache;
 
@@ -23,43 +23,43 @@ public class BallNumber {
         private BallNumberCache() {
         }
 
-        public static boolean contains(int value) {
+        public static boolean contains(final int value) {
             return cache[0].intValue() <= value && value <= cache[cache.length - 1].intValue();
         }
 
-        public static BallNumber of(int value) {
+        public static BallNumber of(final int value) {
             return cache[value - 1];
         }
     }
 
-    private static int parseInt(char value) {
+    private static int parseInt(final char value) {
         return value - '0';
     }
 
-    private static void validate(int value) {
-        if (!isInValidNumericRange(value)) {
+    private static void validate(final int value) {
+        if (!isInRange(value)) {
             throw new NumberFormatException(String.format("value is too small or too high: %d", value));
         }
     }
 
-    private static boolean isInValidNumericRange(int value) {
+    private static boolean isInRange(final int value) {
         return MIN <= value && value <= MAX;
     }
 
-    public static BallNumber of(int value) {
+    public static BallNumber of(final int value) {
         if (BallNumberCache.contains(value)) {
             return BallNumberCache.of(value);
         }
-        return new BallNumber(value);
+        throw new IllegalArgumentException("not allowed ball number");
     }
 
-    public static BallNumber of(char value) {
+    public static BallNumber of(final char value) {
         return BallNumber.of(parseInt(value));
     }
 
     private final int value;
 
-    private BallNumber(int value) {
+    private BallNumber(final int value) {
         validate(value);
         this.value = value;
     }
