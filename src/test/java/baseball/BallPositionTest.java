@@ -12,25 +12,25 @@ class BallPositionTest {
     @ParameterizedTest
     @ValueSource(ints = {-5, -1, 0, 4, 5, 10})
     void invalidPosition(int invalidPositionNo) {
-        assertThatThrownBy(() -> BallPosition.of(invalidPositionNo)).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> BallPosition.from(invalidPositionNo)).isInstanceOf(IllegalArgumentException.class);
     }
 
     @ParameterizedTest
     @ValueSource(ints = {1, 2, 3})
     void validPosition(int validPositionNo) {
-        assertThatCode(() -> BallPosition.of(validPositionNo)).doesNotThrowAnyException();
+        assertThatCode(() -> BallPosition.from(validPositionNo)).doesNotThrowAnyException();
     }
 
     @ParameterizedTest
     @ValueSource(ints = {1, 2, 3})
     void equals(int validPositionNo) {
-        assertThat(BallPosition.of(validPositionNo)).isEqualTo(BallPosition.of(validPositionNo));
+        assertThat(BallPosition.from(validPositionNo)).isEqualTo(BallPosition.from(validPositionNo));
     }
 
     @ParameterizedTest
     @ValueSource(ints = {1, 2, 3})
     void allCached(int validPositionNo) {
-        assertThat(BallPosition.of(validPositionNo)).isEqualTo(BallPosition.of(validPositionNo));
+        assertThat(BallPosition.from(validPositionNo)).isEqualTo(BallPosition.from(validPositionNo));
     }
 
 

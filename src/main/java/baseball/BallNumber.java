@@ -46,15 +46,15 @@ public final class BallNumber {
         return MIN <= value && value <= MAX;
     }
 
-    public static BallNumber of(final int value) {
+    public static BallNumber from(final int value) {
         if (BallNumberCache.contains(value)) {
             return BallNumberCache.of(value);
         }
         throw new IllegalArgumentException("not allowed ball number");
     }
 
-    public static BallNumber of(final char value) {
-        return BallNumber.of(parseInt(value));
+    public static BallNumber from(final char value) {
+        return BallNumber.from(parseInt(value));
     }
 
     private final int value;

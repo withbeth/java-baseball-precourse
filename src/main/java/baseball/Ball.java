@@ -14,11 +14,11 @@ public final class Ball {
     }
 
     public static Ball of(int ballPosition, int ballNumber) {
-        return new Ball(BallPosition.of(ballPosition), BallNumber.of(ballNumber));
+        return new Ball(BallPosition.from(ballPosition), BallNumber.from(ballNumber));
     }
 
     public static Ball of(int ballPosition, BallNumber ballNumber) {
-        return new Ball(BallPosition.of(ballPosition), ballNumber);
+        return new Ball(BallPosition.from(ballPosition), ballNumber);
     }
 
     private Ball(BallPosition ballPosition, BallNumber ballNumber) {

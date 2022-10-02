@@ -48,7 +48,7 @@ public final class BallPosition {
         this.value = value;
     }
 
-    public static BallPosition of(final int value) {
+    public static BallPosition from(final int value) {
         if (BallPositionCache.contains(value)) {
             return BallPositionCache.of(value);
         }

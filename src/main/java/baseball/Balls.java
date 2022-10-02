@@ -36,7 +36,7 @@ public final class Balls {
         }
     }
 
-    public static Balls of(final List<BallNumber> ballNumbers) {
+    public static Balls from(final List<BallNumber> ballNumbers) {
         return new Balls(ballNumbers);
     }
 

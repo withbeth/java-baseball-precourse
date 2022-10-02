@@ -11,33 +11,36 @@ public class BallsTest {
 
     @Test
     void nullOrEmptyBallNumbers() {
-        assertThatThrownBy(() -> Balls.of(null))
+        assertThatThrownBy(() -> Balls.from(null))
             .isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> Balls.of(Collections.emptyList()))
+        assertThatThrownBy(() -> Balls.from(Collections.emptyList()))
             .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     void tooFewOrTooManyBallNumbers() {
-        assertThatThrownBy(() -> Balls.of(Collections.singletonList(BallNumber.of(1))))
+        assertThatThrownBy(() -> Balls.from(Collections.singletonList(BallNumber.from(1))))
             .isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> Balls.of(Arrays.asList(BallNumber.of(1), BallNumber.of(2))))
+        assertThatThrownBy(() -> Balls.from(Arrays.asList(BallNumber.from(1), BallNumber.from(2))))
             .isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> Balls.of(Arrays.asList(BallNumber.of(1), BallNumber.of(2), BallNumber.of(3), BallNumber.of(4))))
+        assertThatThrownBy(() -> Balls.from(Arrays.asList(BallNumber.from(1), BallNumber.from(2), BallNumber.from(3), BallNumber.from(4))))
             .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     void validBallNumberSize() {
-        assertThatCode(() -> Balls.of(Arrays.asList(BallNumber.of(1), BallNumber.of(2), BallNumber.of(3))))
+        assertThatCode(() -> Balls.from(Arrays.asList(BallNumber.from(1), BallNumber.from(2), BallNumber.from(3))))
             .doesNotThrowAnyException();
     }
 
     @Test
     void nonUniqueBallNumbers() {
-        assertThatThrownBy(() -> Balls.of(Arrays.asList(BallNumber.of(1), BallNumber.of(1), BallNumber.of(1))))
+        assertThatThrownBy(() -> Balls.from(Arrays.asList(BallNumber.from(1), BallNumber.from(1), BallNumber.from(1))))
             .isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> Balls.of(Arrays.asList(BallNumber.of(9), BallNumber.of(1), BallNumber.of(1))))
+        assertThatThrownBy(() -> Balls.from(Arrays.asList(BallNumber.from(9), BallNumber.from(1), BallNumber.from(1))))
             .isInstanceOf(IllegalArgumentException.class);
     }
+
+
+
 }
