@@ -2,31 +2,32 @@ package baseball;
 
 import java.util.Objects;
 
-public class BaseBallNumber {
+// TODO : move validation ?
+public class BallNumber {
 
-    private static final int MIN = 1;
-    private static final int MAX = 9;
+    private static final int MIN = GameConfiguration.MIN_BALL_NUM;
+    private static final int MAX = GameConfiguration.MAX_BALL_NUM;
 
-    private static class BaseBallNumberCache {
+    private static class BallNumberCache {
 
-        private static final BaseBallNumber[] cache;
+        private static final BallNumber[] cache;
 
         static {
-            cache = new BaseBallNumber[MAX - MIN + 1];
+            cache = new BallNumber[MAX - MIN + 1];
             int j = MIN;
             for (int i = 0; i < cache.length; i++) {
-                cache[i] = new BaseBallNumber(j++);
+                cache[i] = new BallNumber(j++);
             }
         }
 
-        private BaseBallNumberCache() {
+        private BallNumberCache() {
         }
 
         public static boolean contains(int value) {
             return cache[0].intValue() <= value && value <= cache[cache.length - 1].intValue();
         }
 
-        public static BaseBallNumber of(int value) {
+        public static BallNumber of(int value) {
             return cache[value - 1];
         }
     }
@@ -36,29 +37,29 @@ public class BaseBallNumber {
     }
 
     private static void validate(int value) {
-        if (!isInValidRange(value)) {
+        if (!isInValidNumericRange(value)) {
             throw new NumberFormatException(String.format("value is too small or too high: %d", value));
         }
     }
 
-    private static boolean isInValidRange(int value) {
+    private static boolean isInValidNumericRange(int value) {
         return MIN <= value && value <= MAX;
     }
 
-    public static BaseBallNumber of(int value) {
-        if (BaseBallNumberCache.contains(value)) {
-            return BaseBallNumberCache.of(value);
+    public static BallNumber of(int value) {
+        if (BallNumberCache.contains(value)) {
+            return BallNumberCache.of(value);
         }
-        return new BaseBallNumber(value);
+        return new BallNumber(value);
     }
 
-    public static BaseBallNumber of(char value) {
-        return BaseBallNumber.of(parseInt(value));
+    public static BallNumber of(char value) {
+        return BallNumber.of(parseInt(value));
     }
 
     private final int value;
 
-    private BaseBallNumber(int value) {
+    private BallNumber(int value) {
         validate(value);
         this.value = value;
     }
@@ -75,7 +76,7 @@ public class BaseBallNumber {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        BaseBallNumber that = (BaseBallNumber) o;
+        BallNumber that = (BallNumber) o;
         return value == that.value;
     }
 
@@ -86,7 +87,7 @@ public class BaseBallNumber {
 
     @Override
     public String toString() {
-        return "BaseBallNumber{" +
+        return "BallNumber{" +
             "value=" + value +
             '}';
     }
