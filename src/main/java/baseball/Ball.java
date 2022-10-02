@@ -17,6 +17,10 @@ public final class Ball {
         return new Ball(BallPosition.of(ballPosition), BallNumber.of(ballNumber));
     }
 
+    public static Ball of(int ballPosition, BallNumber ballNumber) {
+        return new Ball(BallPosition.of(ballPosition), ballNumber);
+    }
+
     private Ball(BallPosition ballPosition, BallNumber ballNumber) {
         validate(ballPosition, ballNumber);
         this.ballPosition = ballPosition;
