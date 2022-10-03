@@ -7,7 +7,7 @@ import java.util.List;
 
 public final class Balls {
 
-    private static final int MAX_SIZE = 3;
+    private static final int BALL_SIZE = BaseBallGameConfig.MAX_BALL_COUNT;
 
     private final List<Ball> balls;
 
@@ -29,7 +29,7 @@ public final class Balls {
     }
 
     private static boolean isValidSize(final List<BallNumber> ballNumbers) {
-        return ballNumbers != null && ballNumbers.size() == MAX_SIZE;
+        return ballNumbers != null && ballNumbers.size() == BALL_SIZE;
     }
 
     private static boolean isAllUnique(final List<BallNumber> ballNumbers) {
@@ -47,8 +47,8 @@ public final class Balls {
     }
 
     private static List<Ball> mapToBalls(final List<BallNumber> ballNumbers) {
-        final List<Ball> result = new ArrayList<>(MAX_SIZE);
-        for (int i = 0; i < MAX_SIZE; i++) {
+        final List<Ball> result = new ArrayList<>(BALL_SIZE);
+        for (int i = 0; i < BALL_SIZE; i++) {
             result.add(Ball.from(i + 1, ballNumbers.get(i)));
         }
         return result;
