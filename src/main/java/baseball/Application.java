@@ -13,12 +13,12 @@ public class Application {
 
             play();
 
-            isPlayable = wantToContinue();
+            isPlayable = canContinue();
 
         }
     }
 
-    private static boolean wantToContinue() {
+    private static boolean canContinue() {
         InputView.printContinueOrEnd(INPUT_NUMBER_GAME_CONTINUE, INPUT_NUMBER_GAME_END);
         final String continueOrEndInput = InputView.getUserInput();
 

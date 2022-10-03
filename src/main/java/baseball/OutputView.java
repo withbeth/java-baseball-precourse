@@ -16,10 +16,10 @@ public final class OutputView {
         if (gameResult == null || !gameResult.isGameOver()) {
             return;
         }
-        System.out.println(createGameOverMessage(gameResult));
+        System.out.println(createGameOverMessage(gameResult.getAnswerCount()));
     }
 
-    private static String createGameResultMessages(final GameResult gameResult) {
+    static String createGameResultMessages(final GameResult gameResult) {
         if (gameResult.hasNothing()) {
             return createNothingResultMessage();
         }
@@ -48,15 +48,15 @@ public final class OutputView {
         return "낫싱";
     }
 
-    private static String createBallResultMessage(final int count) {
-        return String.format("%d볼", count);
+    private static String createBallResultMessage(final int ballCountcount) {
+        return String.format("%d볼", ballCountcount);
     }
 
-    private static String createStrikeResultMessage(final int count) {
-        return String.format("%d스트라이크", count);
+    private static String createStrikeResultMessage(final int strikeCount) {
+        return String.format("%d스트라이크", strikeCount);
     }
 
-    private static String createGameOverMessage(final GameResult gameResult) {
-        return String.format("%d개의 숫자를 모두 맞히셨습니다! 게임 종료", gameResult.getAnswerCount());
+    private static String createGameOverMessage(final int answerCount) {
+        return String.format("%d개의 숫자를 모두 맞히셨습니다! 게임 종료", answerCount);
     }
 }
