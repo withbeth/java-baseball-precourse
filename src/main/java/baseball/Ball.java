@@ -13,11 +13,12 @@ public final class Ball {
         }
     }
 
-    public static Ball of(int ballPosition, int ballNumber) {
+    public static Ball from(int ballPosition, int ballNumber) {
         return new Ball(BallPosition.from(ballPosition), BallNumber.from(ballNumber));
     }
 
-    public static Ball of(int ballPosition, BallNumber ballNumber) {
+    // TODO : we can remove it
+    public static Ball from(int ballPosition, BallNumber ballNumber) {
         return new Ball(BallPosition.from(ballPosition), ballNumber);
     }
 
@@ -27,18 +28,20 @@ public final class Ball {
         this.ballNumber = ballNumber;
     }
 
-    // TODO : we can do better right?
-    public BallJudgeResult judge(Ball other) {
+    public BallResult judgeTo(Ball other) {
         if (other == null) {
-            return BallJudgeResult.NOTHING;
+            return BallResult.NOTHING;
         }
+        // same position and same number
         if (this.equals(other)) {
-            return BallJudgeResult.STRIKE;
+            return BallResult.STRIKE;
         }
+        // different position and same number
         if (this.ballNumber.equals(other.ballNumber)) {
-            return BallJudgeResult.BALL;
+            return BallResult.BALL;
         }
-        return BallJudgeResult.NOTHING;
+        // different position and different number
+        return BallResult.NOTHING;
     }
 
     @Override
