@@ -6,7 +6,6 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.EnumSet;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -48,7 +47,7 @@ public class BallsTest {
 
     @ParameterizedTest
     @ValueSource(ints = {1, 2, 3, 4, 5, 6, 7, 8, 9})
-    void nonUniqueBallNumbers(int ballNumber) {
+    void nonUniqueBallNumbers(final int ballNumber) {
         assertThatThrownBy(() -> Balls.from(Arrays.asList(ballNumber, ballNumber, ballNumber)))
             .isInstanceOf(IllegalArgumentException.class);
         assertThatThrownBy(() -> Balls.from(Arrays.asList(1, ballNumber, ballNumber)))
@@ -66,21 +65,21 @@ public class BallsTest {
 
     @ParameterizedTest
     @CsvSource(value = {"1:1", "2:2", "3:3"}, delimiter = ':')
-    void judgeBall_strike(int ballPosition, int ballNumber) {
+    void judgeBall_strike(final int ballPosition, final int ballNumber) {
         assertThat(otherBalls.judgeTo(Ball.from(ballPosition, ballNumber)))
             .isEqualTo(BallResult.STRIKE);
     }
 
     @ParameterizedTest
     @CsvSource(value = {"1:2", "1:3", "2:3", "2:1", "3:1", "3:2"}, delimiter = ':')
-    void judgeBall_ball(int ballPosition, int ballNumber) {
+    void judgeBall_ball(final int ballPosition, final int ballNumber) {
         assertThat(otherBalls.judgeTo(Ball.from(ballPosition, ballNumber)))
             .isEqualTo(BallResult.BALL);
     }
 
     @ParameterizedTest
     @ValueSource(ints = {4, 5, 6, 7, 8, 9})
-    void judgeBall_nothing(int ballNumber) {
+    void judgeBall_nothing(final int ballNumber) {
         assertThat(otherBalls.judgeTo(Ball.from(1, ballNumber)))
             .isEqualTo(BallResult.NOTHING);
         assertThat(otherBalls.judgeTo(Ball.from(2, ballNumber)))
@@ -91,7 +90,7 @@ public class BallsTest {
 
     @Test
     void judgeBalls_null() {
-        GameResult gameResult = otherBalls.judgeTo((Balls) null);
+        final GameResult gameResult = otherBalls.judgeTo((Balls) null);
         assertThat(gameResult.getStrikeCount()).isEqualTo(0);
         assertThat(gameResult.getBallCount()).isEqualTo(0);
         assertThat(gameResult.isGameOver()).isFalse();
@@ -116,15 +115,15 @@ public class BallsTest {
 
     @Test
     void judgeBalls_2strike() {
-        GameResult gameResult = otherBalls.judgeTo(Balls.from(Arrays.asList(1, 2, 4)));
+        final GameResult gameResult = otherBalls.judgeTo(Balls.from(Arrays.asList(1, 2, 4)));
         assertThat(gameResult.getStrikeCount()).isEqualTo(2);
         assertThat(gameResult.getBallCount()).isEqualTo(0);
         assertThat(gameResult.isGameOver()).isFalse();
     }
-    
+
     @Test
     void judgeBalls_1strike_2ball() {
-        GameResult gameResult = otherBalls.judgeTo(Balls.from(Arrays.asList(1, 3, 2)));
+        final GameResult gameResult = otherBalls.judgeTo(Balls.from(Arrays.asList(1, 3, 2)));
         assertThat(gameResult.getStrikeCount()).isEqualTo(1);
         assertThat(gameResult.getBallCount()).isEqualTo(2);
         assertThat(gameResult.isGameOver()).isFalse();
@@ -132,7 +131,7 @@ public class BallsTest {
 
     @Test
     void judgeBalls_1strike_1ball() {
-        GameResult gameResult = otherBalls.judgeTo(Balls.from(Arrays.asList(1, 3, 4)));
+        final GameResult gameResult = otherBalls.judgeTo(Balls.from(Arrays.asList(1, 3, 4)));
         assertThat(gameResult.getStrikeCount()).isEqualTo(1);
         assertThat(gameResult.getBallCount()).isEqualTo(1);
         assertThat(gameResult.isGameOver()).isFalse();
@@ -140,7 +139,7 @@ public class BallsTest {
 
     @Test
     void judgeBalls_3ball() {
-        GameResult gameResult = otherBalls.judgeTo(Balls.from(Arrays.asList(2, 3, 1)));
+        final GameResult gameResult = otherBalls.judgeTo(Balls.from(Arrays.asList(2, 3, 1)));
         assertThat(gameResult.getStrikeCount()).isEqualTo(0);
         assertThat(gameResult.getBallCount()).isEqualTo(3);
         assertThat(gameResult.isGameOver()).isFalse();
@@ -148,7 +147,7 @@ public class BallsTest {
 
     @Test
     void judgeBalls_2ball() {
-        GameResult gameResult = otherBalls.judgeTo(Balls.from(Arrays.asList(2, 3, 9)));
+        final GameResult gameResult = otherBalls.judgeTo(Balls.from(Arrays.asList(2, 3, 9)));
         assertThat(gameResult.getStrikeCount()).isEqualTo(0);
         assertThat(gameResult.getBallCount()).isEqualTo(2);
         assertThat(gameResult.isGameOver()).isFalse();
@@ -156,7 +155,7 @@ public class BallsTest {
 
     @Test
     void judgeBalls_1ball() {
-        GameResult gameResult = otherBalls.judgeTo(Balls.from(Arrays.asList(3, 8, 9)));
+        final GameResult gameResult = otherBalls.judgeTo(Balls.from(Arrays.asList(3, 8, 9)));
         assertThat(gameResult.getStrikeCount()).isEqualTo(0);
         assertThat(gameResult.getBallCount()).isEqualTo(1);
         assertThat(gameResult.isGameOver()).isFalse();
@@ -164,7 +163,7 @@ public class BallsTest {
 
     @Test
     void judgeBalls_nothing() {
-        GameResult gameResult = otherBalls.judgeTo(Balls.from(Arrays.asList(7, 8, 9)));
+        final GameResult gameResult = otherBalls.judgeTo(Balls.from(Arrays.asList(7, 8, 9)));
         assertThat(gameResult.getStrikeCount()).isEqualTo(0);
         assertThat(gameResult.getBallCount()).isEqualTo(0);
         assertThat(gameResult.isGameOver()).isFalse();
