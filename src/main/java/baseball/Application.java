@@ -24,13 +24,14 @@ public class Application {
 
         try {
             return INPUT_NUMBER_GAME_CONTINUE == Integer.parseInt(continueOrEndInput);
-        } catch (final Throwable throwable) {
+        } catch (final NumberFormatException numberFormatException) {
             return false;
         }
     }
 
     private static void play() {
-        final BaseBallGame baseBallGame = new BaseBallGame();
+        final Balls answer = BaseBallGame.createAnswer();
+        final BaseBallGame baseBallGame = new BaseBallGame(answer);
         while (!baseBallGame.isGameOver()) {
             InputView.printPredictNumberRequest();
             final String userNumberInput = InputView.getUserInput();
