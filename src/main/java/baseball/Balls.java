@@ -80,11 +80,11 @@ public final class Balls {
     public GameResult judgeTo(final Balls other) {
         final GameResult result = new GameResult();
         if (other == null) {
-            result.add(BallResult.NOTHING);
+            result.reflect(BallResult.NOTHING);
             return result;
         }
         for (final Ball otherBall : other.balls) {
-            result.add(judgeTo(otherBall));
+            result.reflect(judgeTo(otherBall));
         }
         return result;
     }

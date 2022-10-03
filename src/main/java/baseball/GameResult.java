@@ -1,39 +1,35 @@
 package baseball;
 
-import java.util.HashMap;
-import java.util.Map;
-
-// TODO
 public final class GameResult {
 
     private static final int MAX_BALL_COUNT = BaseBallGameConfig.MAX_BALL_COUNT;
 
-    private final Map<BallResult, Integer> ballResultCounterMap = new HashMap<>();
+    private int strikeCount = 0;
+    private int ballCount = 0;
+
+    public void reflect(final BallResult ballResult) {
+        if (ballResult == null) {
+            return;
+        }
+        if (ballResult.isStrike()) {
+            strikeCount++;
+            return;
+        }
+        if (ballResult.isBall()) {
+            ballCount++;
+        }
+    }
 
     public boolean isGameOver() {
         return getStrikeCount() == MAX_BALL_COUNT;
     }
 
-    public int getBallResultCount(final BallResult ballResult) {
-        if (ballResult == null) {
-            return 0;
-        }
-        return ballResultCounterMap.getOrDefault(ballResult, 0);
-    }
-
-    public void add(final BallResult ballResult) {
-        if (ballResult == null) {
-            return;
-        }
-        ballResultCounterMap.put(ballResult, ballResultCounterMap.getOrDefault(ballResult, 0) + 1);
-    }
-
     public int getStrikeCount() {
-        return getBallResultCount(BallResult.STRIKE);
+        return strikeCount;
     }
 
     public int getBallCount() {
-        return getBallResultCount(BallResult.BALL);
+        return ballCount;
     }
 
     public int getAnswerCount() {

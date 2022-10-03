@@ -2,17 +2,28 @@ package baseball;
 
 public enum BallResult {
 
-    STRIKE,
+    STRIKE {
+        @Override
+        public boolean isStrike() {
+            return true;
+        }
+    },
 
-    BALL,
+    BALL {
+        @Override
+        public boolean isBall() {
+            return true;
+        }
+    },
 
     NOTHING;
 
     public boolean isStrike() {
-        return this == STRIKE;
+        return false;
     }
 
     public boolean isBall() {
-        return this == BALL;
+        return false;
     }
+
 }

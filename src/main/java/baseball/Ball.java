@@ -23,7 +23,6 @@ public final class Ball {
         return new Ball(BallPosition.from(ballPosition), BallNumber.from(ballNumber));
     }
 
-    // TODO : we can remove it
     public static Ball from(final int ballPosition, final BallNumber ballNumber) {
         return new Ball(BallPosition.from(ballPosition), ballNumber);
     }
