@@ -30,8 +30,7 @@ public class Application {
     }
 
     private static void play() {
-        final Balls answer = BaseBallGame.createAnswer();
-        final BaseBallGame baseBallGame = new BaseBallGame(answer);
+        final BaseBallGame baseBallGame = new BaseBallGame();
         while (!baseBallGame.isGameOver()) {
             InputView.printPredictNumberRequest();
             final String userNumberInput = InputView.getUserInput();
