@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 // TODO : maybe we can refactor data structure later for view
-public class GameResult {
+public final class GameResult {
 
     private static final int MAX_STRIKE_COUNT = 3;
 
@@ -14,14 +14,14 @@ public class GameResult {
         return getStrikeCount() == MAX_STRIKE_COUNT;
     }
 
-    public int getBallResultCount(BallResult ballResult) {
+    public int getBallResultCount(final BallResult ballResult) {
         if (ballResult == null) {
             return 0;
         }
         return ballResultCounterMap.getOrDefault(ballResult, 0);
     }
 
-    public void add(BallResult ballResult) {
+    public void add(final BallResult ballResult) {
         if (ballResult == null) {
             return;
         }
@@ -34,5 +34,17 @@ public class GameResult {
 
     public int getBallCount() {
         return getBallResultCount(BallResult.BALL);
+    }
+
+    public int getAnswerCount() {
+        return getStrikeCount();
+    }
+
+    public boolean hasBalls() {
+        return getBallCount() > 0;
+    }
+
+    public boolean hasStrikes() {
+        return getStrikeCount() > 0;
     }
 }
