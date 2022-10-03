@@ -5,7 +5,7 @@ import camp.nextstep.edu.missionutils.Console;
 public final class InputView {
 
     public static void printPredictNumberRequest() {
-        System.out.print("숫자를 입력해주세요: ");
+        System.out.print("숫자를 입력해 주세요 : ");
     }
 
     public static void printContinueOrEnd(final int continueNumber, final int endNumber) {

@@ -3,15 +3,15 @@ package baseball;
 import java.util.HashMap;
 import java.util.Map;
 
-// TODO : maybe we can refactor data structure later for view
+// TODO
 public final class GameResult {
 
-    private static final int MAX_STRIKE_COUNT = 3;
+    private static final int MAX_BALL_COUNT = BaseBallGameConfig.MAX_BALL_COUNT;
 
     private final Map<BallResult, Integer> ballResultCounterMap = new HashMap<>();
 
     public boolean isGameOver() {
-        return getStrikeCount() == MAX_STRIKE_COUNT;
+        return getStrikeCount() == MAX_BALL_COUNT;
     }
 
     public int getBallResultCount(final BallResult ballResult) {
@@ -46,5 +46,21 @@ public final class GameResult {
 
     public boolean hasStrikes() {
         return getStrikeCount() > 0;
+    }
+
+    public boolean hasNothing() {
+        return !hasBalls() && !hasStrikes();
+    }
+
+    public boolean hasOnlyStrikes() {
+        return !hasBalls() && hasStrikes();
+    }
+
+    public boolean hasOnlyBalls() {
+        return hasBalls() && !hasStrikes();
+    }
+
+    public boolean hasBallsAndStrikes() {
+        return hasBalls() && hasStrikes();
     }
 }
